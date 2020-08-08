@@ -4,7 +4,8 @@
     "jsx": "react",
     "paths": {
       "@/components/*": ["src/components/*"],
-      "@/containers/*": ["src/containers/*"]
+      "@/containers/*": ["src/containers/*"],
+      "@/assets/*": ["src/assets/*"]
     }
   },
   "include": ["src/**/*"],

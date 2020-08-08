@@ -1,0 +1,17 @@
+.NavigationItem {
+  list-style: none;
+}
+
+.NavigationLink {
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  box-sizing: border-box;
+  padding: 0 0.75rem;
+  color: #fff;
+  text-decoration: none;
+
+  &.Active {
+    border-bottom: 4px solid #be442f;
+  }
+}

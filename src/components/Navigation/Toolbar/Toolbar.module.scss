@@ -1,0 +1,24 @@
+.Toolbar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  background-color: #a8a466;
+}
+
+.LogoContainer {
+  height: 60%;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+}
+
+.Logo {
+  height: 100%;
+}
+
+.Nav {
+  display: flex;
+}
