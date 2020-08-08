@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Burger from '@/components/Burger/Burger'
 import BuildControls from '@/components/Burger/BuildControls/BuildControls'
+import Modal from '@/components/Modal/Modal'
+import OrderSummary from '@/components/OrderSummary/OrderSummary'
 
 const INGREDIENT_PRICES = {
   salad: 0.7,
@@ -17,6 +19,7 @@ export default function BurgerBuilder() {
     meat: 0,
   })
   const [totalPrice, setTotalPrice] = useState(0)
+  const [purchasing, setPurchasing] = useState(false)
 
   function updateIngredient({ type, incremental }) {
     if (!ingredients[type] && !incremental) return
@@ -32,10 +35,26 @@ export default function BurgerBuilder() {
     setTotalPrice(newTotalPrice)
   }
 
+  function processOrder() {
+    setPurchasing(true)
+  }
+
+  function handleBackdropClick() {
+    setPurchasing(false)
+  }
+
   return (
-    <div>
-      <Burger ingredients={ingredients} />
-      <BuildControls totalPrice={totalPrice} onUpdateIngredient={updateIngredient} />
-    </div>
-  )
+		<div>
+      <Modal show={purchasing} onBackdropClick={handleBackdropClick}>
+        <OrderSummary ingredients={ingredients} />
+      </Modal>
+			<Burger ingredients={ingredients} />
+			<BuildControls
+				ingredients={ingredients}
+				totalPrice={totalPrice}
+        onUpdateIngredient={updateIngredient}
+        onProcessOrder={processOrder}
+			/>
+		</div>
+	)
 }

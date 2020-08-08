@@ -19,15 +19,19 @@ export default function BuildControls( props ) {
 
   return (
 		<div className={classes.BuildControls}>
-      <span>Total price: ${props.totalPrice.toFixed(2)}</span>
+			<span>Total price: ${props.totalPrice.toFixed(2)}</span>
 			{controls.map((ctl) => (
 				<BuildControl
 					key={ctl.label}
 					label={ctl.label}
+					ingredient={props.ingredients[ctl.type]}
 					onAdd={update(ctl, true)}
 					onRemove={update(ctl)}
 				/>
 			))}
+			<button className={classes.OrderButton} disabled={!props.totalPrice} onClick={props.onProcessOrder}>
+				Order Now
+			</button>
 		</div>
 	)
 }
