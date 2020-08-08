@@ -14,12 +14,10 @@ export default function Burger( props ) {
 		))
   }).flat()
 
-  if (ingredientComponents.length) {
+  if (!ingredientComponents.length) {
     ingredientComponents = "Please start adding ingredients!"
   }
   
-  console.log('ingredientComponents', ingredientComponents)
-
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
