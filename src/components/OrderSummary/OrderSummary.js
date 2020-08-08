@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@/components/Button/Button'
 
 import classes from './OrderSummary.module'
 
@@ -14,7 +15,10 @@ export default function OrderSummary(props) {
 					</li>
 				))}
 			</ul>
+      <span>Total price: ${props.totalPrice.toFixed(2)}</span>
       <p>Continue to Checkout?</p>
+      <Button type="Danger" onClick={props.onCancel}>Cancel</Button>
+      <Button type="Success" onClick={props.onContinue}>Continue</Button>
 		</div>
 	)
 }

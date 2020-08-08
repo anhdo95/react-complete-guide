@@ -39,21 +39,30 @@ export default function BurgerBuilder() {
     setPurchasing(true)
   }
 
-  function handleBackdropClick() {
+  function handleCancel() {
     setPurchasing(false)
+  }
+
+  function handleCheckout() {
+    alert('You continue')
   }
 
   return (
 		<div>
-      <Modal show={purchasing} onBackdropClick={handleBackdropClick}>
-        <OrderSummary ingredients={ingredients} />
-      </Modal>
+			<Modal show={purchasing} onBackdropClick={handleCancel}>
+				<OrderSummary
+					ingredients={ingredients}
+					totalPrice={totalPrice}
+					onCancel={handleCancel}
+					onContinue={handleCheckout}
+				/>
+			</Modal>
 			<Burger ingredients={ingredients} />
 			<BuildControls
 				ingredients={ingredients}
 				totalPrice={totalPrice}
-        onUpdateIngredient={updateIngredient}
-        onProcessOrder={processOrder}
+				onUpdateIngredient={updateIngredient}
+				onProcessOrder={processOrder}
 			/>
 		</div>
 	)
