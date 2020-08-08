@@ -33,6 +33,8 @@ const moduleFileExtensions = [
   'json',
   'web.jsx',
   'jsx',
+  'css',
+  'scss',
 ];
 
 // Resolve file paths in the same order as webpack
