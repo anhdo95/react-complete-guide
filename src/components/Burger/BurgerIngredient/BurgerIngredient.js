@@ -1,12 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classes from './BurgerIngredient.module'
 
 export default function BurgerIngredient(props) {
 	switch (props.type) {
-		case 'BreadBottom':
+		case 'bread-bottom':
 			return <div className={classes.BreadBottom}></div>
 
-		case 'BreadTop':
+		case 'bread-top':
 			return (
 				<div className={classes.BreadTop}>
 					<div className={classes.Seeds1}></div>
@@ -14,19 +15,23 @@ export default function BurgerIngredient(props) {
 				</div>
 			)
 
-		case 'Meat':
+		case 'meat':
 			return <div className={classes.Meat}></div>
 
-		case 'Cheese':
+		case 'cheese':
 			return <div className={classes.Cheese}></div>
 
-		case 'Salad':
+		case 'salad':
 			return <div className={classes.Salad}></div>
 
-		case 'Bacon':
+		case 'bacon':
 			return <div className={classes.Bacon}></div>
 
 		default:
 			return null
 	}
+}
+
+BurgerIngredient.propTypes = {
+  type: PropTypes.string.isRequired,
 }
