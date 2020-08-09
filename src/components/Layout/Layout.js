@@ -7,8 +7,8 @@ import Spinner from '@/components/Spinner/Spinner'
 import LoadingContext from '@/context/LoadingContext'
 import axios from '@/services/axios'
 
-import classes from './Layout.module'
 import 'react-toastify/dist/ReactToastify.css';
+import classes from './Layout.module'
 
 export default class Layout extends React.Component {
 

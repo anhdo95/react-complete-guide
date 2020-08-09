@@ -11,8 +11,8 @@ export default function Toolbar() {
         <img className={classes.Logo} src={logo} alt="Logo" />
       </div>
       <nav className={classes.Nav}>
-        <NavigationItem href="/" active>Burger Builder</NavigationItem>
-        <NavigationItem href="/checkout">Checkout</NavigationItem>
+        <NavigationItem to="/" exact>Burger Builder</NavigationItem>
+        <NavigationItem to="/checkout" exact>Checkout</NavigationItem>
       </nav>
     </div>
   )

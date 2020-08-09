@@ -50,7 +50,6 @@ export default function BurgerBuilder() {
   }
 
   function handleCheckout() {
-    
     loadingContext.start()
 
     const order = {
