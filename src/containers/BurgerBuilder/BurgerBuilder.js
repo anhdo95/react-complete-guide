@@ -1,11 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 
 import Burger from '@/components/Burger/Burger'
 import BuildControls from '@/components/Burger/BuildControls/BuildControls'
 import Modal from '@/components/Modal/Modal'
 import OrderSummary from '@/components/OrderSummary/OrderSummary'
-
-import LoadingContext from '@/context/LoadingContext'
 
 import * as apiService from '@/services/api.service'
 
@@ -17,7 +15,6 @@ const INGREDIENT_PRICES = {
 }
 
 export default function BurgerBuilder() {
-  const loadingContext = useContext(LoadingContext)
   const [ingredients, setIngredients] = useState({
     salad: 0,
     cheese: 0,
@@ -50,8 +47,6 @@ export default function BurgerBuilder() {
   }
 
   function handleCheckout() {
-    loadingContext.start()
-
     const order = {
       ingredients,
       totalPrice,
@@ -68,8 +63,6 @@ export default function BurgerBuilder() {
     }
 
     apiService.createOrder(order)
-      .then(loadingContext.stop)
-      .catch(loadingContext.stop)
       .finally(handleCancel)
   }
 
