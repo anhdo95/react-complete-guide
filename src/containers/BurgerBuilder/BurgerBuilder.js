@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
+import qs from 'qs'
 
 import Burger from '@/components/Burger/Burger'
 import BuildControls from '@/components/Burger/BuildControls/BuildControls'
 import Modal from '@/components/Modal/Modal'
 import OrderSummary from '@/components/OrderSummary/OrderSummary'
-
-import * as apiService from '@/services/api.service'
 
 const INGREDIENT_PRICES = {
   salad: 0.7,
@@ -15,6 +15,7 @@ const INGREDIENT_PRICES = {
 }
 
 export default function BurgerBuilder() {
+  const history = useHistory()
   const [ingredients, setIngredients] = useState({
     salad: 0,
     cheese: 0,
@@ -47,24 +48,13 @@ export default function BurgerBuilder() {
   }
 
   function handleCheckout() {
-    const order = {
-      ingredients,
-      totalPrice,
-      customer: {
-        name: 'Richard Do',
-        address: {
-          street: '1 Street',
-          zipCode: '10000',
-          country: 'Vietnam'
-        },
-        email: 'richarddo@test.com', 
-        deliveryMethod: 'fastest'
-      }
-    }
+		history.push({
+			pathname: '/checkout',
+			search: qs.stringify(ingredients),
+		})
 
-    apiService.createOrder(order)
-      .finally(handleCancel)
-  }
+		handleCancel()
+	}
 
   return (
 		<div>

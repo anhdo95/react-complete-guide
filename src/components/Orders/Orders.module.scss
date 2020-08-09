@@ -1,0 +1,19 @@
+.Orders {
+  display: grid;
+  grid-gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.Order {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 5px 5px 2px rgba(0, 0, 0, .2);
+}
+
+.Ingredient {
+  padding: 0.5rem;
+  margin: 0 5px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, .17);
+}
