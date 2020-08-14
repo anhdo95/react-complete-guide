@@ -20,14 +20,16 @@ export default function Checkout() {
   const history = useHistory()
   const location = useLocation()
   const [contact, setContact] = useState()
+  const [isValidContact, setIsValidContact] = useState(true)
   const ingredients = qs.parse(location.search.slice(1))
 
   const totalPrice = _.reduce(ingredients, (sum, quantity, ingredient) => {
     return sum + (INGREDIENT_PRICES[ingredient] * quantity)
   }, 0)
 
-  function handleContactChange(contact) {
+  function handleContactChange(isValid, contact) {
     setContact(contact)
+    setIsValidContact(isValid)
   }
 
   function handleCancel() {
@@ -35,6 +37,8 @@ export default function Checkout() {
   }
 
   function handleCheckout() {
+    if (!isValidContact) return
+
 		const order = {
 			ingredients,
 			totalPrice,

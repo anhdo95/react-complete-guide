@@ -1,20 +1,31 @@
 import React, { useReducer } from 'react'
+import _ from 'lodash'
 
 import classes from './Form.module'
 
-const initialState = {}
+const initialState = {
+  controls: {},
+  isValid: true,
+}
 
 function formReducer (state = initialState, action) {
   switch (action.type) {
     case 'UPDATE':
-      state[action.key] = action.value
+      state.controls[action.key] = {
+        value: action.value,
+        validity: action.validity,
+      }
       break;
+
+    case 'CHECK_VALID':
+      state.isValid = _.some(state.controls, (control) => !control.validity.isValid)
+      break
   
     default:
       break;
   }
 
-  return { ...state }
+  return _.cloneDeep(state)
 }
 
 export default function Form( props ) {
@@ -29,19 +40,17 @@ export default function Form( props ) {
     dispatch({
       type: 'UPDATE',
       key: control.name,
-      value: control.value
+      value: control.value,
+      validity: control.validity
     })
+    dispatch({ type: 'CHECK_VALID' })
 
-    props.onChange(true, state)
+    props.onChange(state.isValid, state.controls)
   }
   
   function handleSubmit(event) {
     event.preventDefault()
-
-    const isValid = true
-    const values = state
-
-    props.onSubmit(isValid, values)
+    props.onSubmit(state.isValid, state.controls)
   }
 
   return (
