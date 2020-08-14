@@ -1,71 +1,44 @@
-import React, { useReducer } from 'react'
+import React from 'react'
+
+import Form from '@/components/Form/Form'
+import FormItem from '@/components/Form/FormItem/FormItem'
+import Input from '@/components/Form/Input/Input'
+import Select from '@/components/Form/Select/Select'
+
+import * as constants from '@/shared/constants'
 
 import classes from './ContactForm.module'
 
-const initialState = {
-  name: '',
-  street: '',
-  postalCode: '',
-  email: ''
-}
-
-function contactReducer (state = initialState, action) {
-  switch (action.type) {
-    case 'UPDATE':
-      state[action.key] = action.value
-      break;
-  
-    default:
-      break;
-  }
-
-  return { ...state }
-}
-
 export default function ContactForm( props ) {
-  const [state, dispatch] = useReducer(contactReducer, initialState)
+	function handleSubmit(isValid, values) {
+		console.log('isValid', isValid)
+		console.log('values', values)
+	}
 
-  function handleInputChange({ target }) {
-    dispatch({
-      type: 'UPDATE',
-      key: target.name,
-      value: target.value
-    })
-
-    props.onChange(state)
-  }
+	function handleChange(isValid, values) {
+		console.log('isValid', isValid)
+		console.log('values', values)
+	}
 
   return (
-		<form className={classes.ContactForm}>
+		<Form className={classes.ContactForm} onSubmit={handleSubmit} onChange={handleChange}>
 			<h3>Contact Form</h3>
-			<input
-				name="name"
-				value={state.name}
-				className={classes.Input}
-				placeholder="Your name"
-				onChange={handleInputChange}
-			/>
-			<input
-				name="street"
-				value={state.street}
-				className={classes.Input}
-				placeholder="Your street"
-				onChange={handleInputChange}
-			/>
-			<input
-				name="postalCode"
-				value={state.postalCode}
-				className={classes.Input}
-				placeholder="Your postal code"
-				onChange={handleInputChange}
-			/>
-			<input
-				name="email"
-				value={state.email}
-				className={classes.Input}
-				placeholder="Your email"
-				onChange={handleInputChange}
-			/>
-		</form>
+			<FormItem name="name" label="Name">
+				<Input placeholder="Your name" />
+			</FormItem>
+			<FormItem name="street" label="Street">
+				<Input placeholder="Your street" />
+			</FormItem>
+			<FormItem name="email" label="Email">
+				<Input placeholder="Your email" />
+			</FormItem>
+			<FormItem name="zipCode" label="Zip Code">
+				<Input placeholder="Your zip code" />
+			</FormItem>
+			<FormItem name="deliveryMethod"label="Delivery Method">
+				<Select placeholder="Delivery method" items={constants.DELIVERY_METHODS} />
+			</FormItem>
+			<button type="submit">dsa</button>
+		</Form>
 	)
 }
