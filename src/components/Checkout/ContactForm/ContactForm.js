@@ -16,8 +16,7 @@ export default function ContactForm( props ) {
 	}
 
 	function handleChange(isValid, values) {
-		console.log('isValid', isValid)
-		console.log('values', values)
+		props.onChange(values)
 	}
 
   return (
@@ -38,7 +37,6 @@ export default function ContactForm( props ) {
 			<FormItem name="deliveryMethod"label="Delivery Method">
 				<Select placeholder="Delivery method" items={constants.DELIVERY_METHODS} />
 			</FormItem>
-			<button type="submit">dsa</button>
 		</Form>
 	)
 }

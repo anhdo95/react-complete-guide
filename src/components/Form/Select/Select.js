@@ -23,7 +23,7 @@ export default function Select( props ) {
   }, {})
 
   return (
-		<select {...attrs} className={classes.Select}>
+		<select {...attrs} className={classes.Select} onChange={props.onChange}>
 			{props.items &&
 				props.items.map((item) => (
 					<option key={item.value} value={item.value}>
