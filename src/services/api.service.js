@@ -4,8 +4,15 @@ export function getIngredientsPrices() {
   return axios.get(`/ingredients/prices.json`)
 }
 
-export function getOrders() {
-  return axios.get(`/orders.json`)
+export function getOrders(userId) {
+	const params = {
+		orderBy: '"userId"',
+		equalTo: `"${userId}"`
+	}
+
+  return axios.get(`/orders.json`, {
+		params
+	})
 }
 
 export function createOrder(order) {
