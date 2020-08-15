@@ -1,13 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
 import BurgerIngredient from '@/components/Burger/BurgerIngredient/BurgerIngredient'
 
 import classes from './Burger.module'
 
 export default function Burger( props ) {
-  let ingredientComponents = Object.keys(props.ingredients).map((type) => {
-    const types = new Array(props.ingredients[type]).fill(type)
+  const ingredients = useSelector(state => state.ingredients)
+
+  let ingredientComponents = _.map(ingredients, (quantity, type) => {
+    const types = new Array(quantity).fill(type)
 
 		return types.map((_, index) => (
 			<BurgerIngredient key={type + index} type={type} />
@@ -25,8 +28,4 @@ export default function Burger( props ) {
       <BurgerIngredient type="bread-bottom" />
     </div>
   )
-}
-
-Burger.propTypes = {
-  ingredients: PropTypes.object.isRequired,
 }

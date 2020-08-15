@@ -1,5 +1,8 @@
 import React, { Suspense } from 'react';
+import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+import store from '@/store/index'
 import Layout from '@/components/Layout/Layout'
 
 function lazy(module) {
@@ -12,17 +15,19 @@ const Orders = lazy(import('@/containers/Orders/Orders'))
 
 function App() {
   return (
-		<BrowserRouter>
-			<Layout>
-				<Suspense fallback={<div>Loading...</div>}>
-					<Switch>
-						<Route path="/checkout" component={Checkout} />
-						<Route path="/orders" component={Orders} />
-						<Route path="/" component={BurgerBuilder} />
-					</Switch>
-				</Suspense>
-			</Layout>
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter>
+				<Layout>
+					<Suspense fallback={<div>Loading...</div>}>
+						<Switch>
+							<Route path="/checkout" component={Checkout} />
+							<Route path="/orders" component={Orders} />
+							<Route path="/" component={BurgerBuilder} />
+						</Switch>
+					</Suspense>
+				</Layout>
+			</BrowserRouter>
+		</Provider>
 	)
 }
 

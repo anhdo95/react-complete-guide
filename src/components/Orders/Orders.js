@@ -6,8 +6,6 @@ import classes from './Orders.module'
 export default function Orders( props ) {
   if (!props.orders) return null
   
-  console.log('props', props)
-
   return (
 		<div className={classes.Orders}>
 			{_.map(props.orders, order => (

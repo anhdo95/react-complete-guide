@@ -1,31 +1,30 @@
 import React, { useState } from 'react'
 import { useLocation, useHistory } from 'react-router'
+import { useSelector } from 'react-redux'
 import qs from 'qs'
 import _ from 'lodash'
 
 import * as apiService from '@/services/api.service'
-
 import CheckoutSummary from '@/components/Checkout/Checkout'
 import ContactForm from '@/components/Checkout/ContactForm/ContactForm'
 import Actions from '@/components/Checkout/Actions/Actions'
-
-const INGREDIENT_PRICES = {
-  salad: 0.7,
-  cheese: 0.8,
-  bacon: 1.3,
-  meat: 1.5,
-}
 
 export default function Checkout() {
   const history = useHistory()
   const location = useLocation()
   const [contact, setContact] = useState()
   const [isValidContact, setIsValidContact] = useState(true)
+  const ingredientsPrices = useSelector(state => state.ingredientsPrices)
+
   const ingredients = qs.parse(location.search.slice(1))
 
-  const totalPrice = _.reduce(ingredients, (sum, quantity, ingredient) => {
-    return sum + (INGREDIENT_PRICES[ingredient] * quantity)
-  }, 0)
+  const totalPrice = _.reduce(
+		ingredients,
+		(sum, quantity, ingredient) => {
+			return sum + ingredientsPrices[ingredient] * quantity
+		},
+		0
+	)
 
   function handleContactChange(isValid, contact) {
     setContact(contact)
@@ -44,14 +43,11 @@ export default function Checkout() {
 			totalPrice,
 			customer: {
 				name: contact.name,
-				address: {
-					street: contact.street,
-					postalCode: contact.postalCode,
-					country: 'Vietnam',
-				},
+        street: contact.street,
+        zipCode: contact.zipCode,
 				email: contact.email,
-				deliveryMethod: 'fastest',
 			},
+      deliveryMethod: contact.deliveryMethod,
 		}
 
     apiService.createOrder(order)
