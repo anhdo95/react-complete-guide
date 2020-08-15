@@ -56,11 +56,15 @@ export default function SignIn() {
       })
       .then((res) => {
         const expires = new Date()
-        expires.setSeconds(+res.expiresIn)
+        expires.setSeconds(expires.getSeconds() + Number(res.expiresIn))
 
         Cookies.set('token', res.idToken, {
           expires
-        })
+				})
+				
+				setTimeout(() => {
+          Cookies.remove('token')
+        }, expires - Date.now())
         
         history.replace('/')
       })
