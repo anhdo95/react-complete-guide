@@ -61,7 +61,7 @@ export default function SignIn() {
         Cookies.set('token', res.idToken, {
           expires
 				})
-				
+
 				setTimeout(() => {
           Cookies.remove('token')
         }, expires - Date.now())
