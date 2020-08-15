@@ -12,6 +12,7 @@ function lazy(module) {
 const BurgerBuilder = lazy(import('@/containers/BurgerBuilder/BurgerBuilder'))
 const Checkout = lazy(import('@/containers/Checkout/Checkout'))
 const Orders = lazy(import('@/containers/Orders/Orders'))
+const SignUp = lazy(import('@/containers/SignUp/SignUp'))
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 						<Switch>
 							<Route path="/checkout" component={Checkout} />
 							<Route path="/orders" component={Orders} />
+							<Route path="/sign-up" component={SignUp} />
 							<Route path="/" component={BurgerBuilder} />
 						</Switch>
 					</Suspense>

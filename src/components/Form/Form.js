@@ -28,6 +28,17 @@ function formReducer (state = initialState, action) {
   return _.cloneDeep(state)
 }
 
+function mapControlsToValues(controls) {
+  return _.reduce(
+    controls,
+    (result, control, key) => {
+      result[key] = control.value
+      return result
+    },
+    {}
+  )
+}
+
 export default function Form( props ) {
   const [state, dispatch] = useReducer(formReducer, initialState)
   let elements = React.Children.toArray(props.children)
@@ -45,26 +56,12 @@ export default function Form( props ) {
     })
     dispatch({ type: 'CHECK_VALID' })
 
-    const values = _.reduce(
-			state.controls,
-			(result, control, key) => {
-				result[key] = control.value
-				return result
-			},
-			{}
-		)
-
-    console.log('values', values)
-
-    props.onChange(
-			state.isValid,
-			values
-		)
+    props.onChange && props.onChange(state.isValid, mapControlsToValues(state.controls))
   }
   
   function handleSubmit(event) {
     event.preventDefault()
-    props.onSubmit(state.isValid, state.controls)
+    props.onSubmit && props.onSubmit(state.isValid, mapControlsToValues(state.controls))
   }
 
   return (

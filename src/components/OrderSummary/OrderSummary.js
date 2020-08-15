@@ -22,8 +22,8 @@ export default function OrderSummary(props) {
 			</ul>
       <span>Total price: ${totalPrice.toFixed(2)}</span>
       <p>Continue to Checkout?</p>
-      <Button type="Danger" onClick={props.onCancel}>Cancel</Button>
-      <Button type="Success" onClick={props.onContinue}>Continue</Button>
+      <Button theme="Danger" onClick={props.onCancel}>Cancel</Button>
+      <Button theme="Success" onClick={props.onContinue}>Continue</Button>
 		</div>
 	)
 }

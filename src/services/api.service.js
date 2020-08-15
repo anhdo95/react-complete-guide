@@ -12,3 +12,10 @@ export function createOrder(order) {
   return axios.post('/orders.json', order)
 }
 
+export function signUp(data) {
+  return axios.post(
+		`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`,
+		data
+	)
+}
+

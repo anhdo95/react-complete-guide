@@ -26,6 +26,7 @@ const AVAILABLE_ATTRS = [
   "readonly",
   "required",
   "size",
+  "type",
   "step",
   "value",
 ]
@@ -36,5 +37,12 @@ export default function Input( props ) {
     return result
   }, {})
 
-  return <input {...attrs} className={classes.Input} type="text" onChange={props.onChange} />
+  return (
+		<input
+			{...attrs}
+			className={classes.Input}
+			type={attrs.type || 'text'}
+			onChange={props.onChange}
+		/>
+	)
 }

@@ -7,8 +7,8 @@ import classes from './Actions.module'
 export default function Actions( props ) {
   return (
     <div className={classes.Actions}>
-        <Button type="Danger" onClick={props.onCancel}>Cancel</Button>
-        <Button type="Success" onClick={props.onComplete}>Complete</Button>
+        <Button theme="Danger" onClick={props.onCancel}>Cancel</Button>
+        <Button theme="Success" onClick={props.onComplete}>Complete</Button>
       </div>
   )
 }
