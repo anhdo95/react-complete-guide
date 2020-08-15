@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import validator from 'validator'
 import Cookies from 'js-cookie'
+import qs from 'qs'
 
 import * as apiService from '@/services/api.service'
 import Form from '@/components/Form/Form'
@@ -45,6 +46,8 @@ const signUpControls = [
 ]
 
 export default function SignUp() {
+  const query = qs.parse(window.location.search.slice(1))
+
   function handleSubmit(isValid, values) {
     if (isValid) {
       apiService.signUp({
@@ -64,13 +67,13 @@ export default function SignUp() {
           Cookies.remove('token')
         }, expires - Date.now())
         
-        window.location = '/'
+        window.location = query.redirectUrl
       })
     }
   }
 
   return (
-    <Form className={classes.SignUp} onSubmit={handleSubmit}>
+		<Form className={classes.SignUp} onSubmit={handleSubmit}>
 			<h3>Sign Up Form</h3>
 			{signUpControls.map((control) => (
 				<FormItem
@@ -82,8 +85,13 @@ export default function SignUp() {
 					{control.element}
 				</FormItem>
 			))}
-      <p>If you have an account already? Move to <Link to="/sign-in">sign in instead</Link></p>
-      <Button theme="Success" type="submit">Sign up</Button>
+			<p>
+				If you have an account already? Move to{' '}
+				<Link to={`/sign-in${window.location.search}`}>sign in instead</Link>
+			</p>
+			<Button theme="Success" type="submit">
+				Sign up
+			</Button>
 		</Form>
-  )
+	)
 }

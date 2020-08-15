@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import qs from 'qs'
 
 import store from '@/store/index'
 import Layout from '@/components/Layout/Layout'
@@ -23,7 +25,9 @@ function App() {
 				<Layout>
 					<Suspense fallback={<div>Loading...</div>}>
 						<Switch>
-							<Route path="/checkout" component={Checkout} />
+							<PrivateRoute path="/checkout">
+								<Checkout />
+							</PrivateRoute>
 							<Route path="/orders" component={Orders} />
 							<Route path="/sign-up" component={SignUp} />
 							<Route path="/sign-in" component={SignIn} />
@@ -35,6 +39,27 @@ function App() {
 			</BrowserRouter>
 		</Provider>
 	)
+}
+
+function PrivateRoute({ children, ...rest }) {
+	const isAuthenticated = Cookies.get('token')
+
+	function render() {
+		if (isAuthenticated) return children
+
+		return (
+			<Redirect
+				to={{
+					pathname: '/sign-in',
+					search: qs.stringify({
+						redirectUrl: window.location.href,
+					}),
+				}}
+			/>
+		)
+	}
+
+	return <Route {...rest} render={render} />
 }
 
 export default App;
