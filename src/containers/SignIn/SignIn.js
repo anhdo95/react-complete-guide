@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import validator from 'validator'
 import Cookies from 'js-cookie'
 
@@ -45,8 +45,6 @@ const signInControls = [
 ]
 
 export default function SignIn() {
-  const history = useHistory()
-
   function handleSubmit(isValid, values) {
     if (isValid) {
       apiService.signIn({
@@ -66,7 +64,7 @@ export default function SignIn() {
           Cookies.remove('token')
         }, expires - Date.now())
         
-        history.replace('/')
+        window.location = '/'
       })
     }
   }

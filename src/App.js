@@ -14,6 +14,7 @@ const Checkout = lazy(import('@/containers/Checkout/Checkout'))
 const Orders = lazy(import('@/containers/Orders/Orders'))
 const SignUp = lazy(import('@/containers/SignUp/SignUp'))
 const SignIn = lazy(import('@/containers/SignIn/SignIn'))
+const SignOut = lazy(import('@/containers/SignOut/SignOut'))
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 							<Route path="/orders" component={Orders} />
 							<Route path="/sign-up" component={SignUp} />
 							<Route path="/sign-in" component={SignIn} />
+							<Route path="/sign-out" component={SignOut} />
 							<Route path="/" component={BurgerBuilder} />
 						</Switch>
 					</Suspense>
