@@ -39,7 +39,12 @@ export default function Layout( props ) {
     }, (error) => {
 			console.error(error)
 			setLoading(false)
-      toast.error(error.message)
+
+			const message = _.get(error, "response.data.error.message") || error.message
+			if (message) {
+				toast.error(message)
+			}
+
       throw error
 		})
 
