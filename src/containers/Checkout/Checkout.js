@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useLocation, useHistory } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import qs from 'qs'
 import _ from 'lodash'
 
 import * as apiService from '@/services/api.service'
+import * as ACTION from '@/store/action'
 import CheckoutSummary from '@/components/Checkout/Checkout'
 import ContactForm from '@/components/Checkout/ContactForm/ContactForm'
 import Actions from '@/components/Checkout/Actions/Actions'
@@ -12,6 +13,7 @@ import Actions from '@/components/Checkout/Actions/Actions'
 export default function Checkout() {
   const history = useHistory()
   const location = useLocation()
+  const dispatch = useDispatch()
   const [contact, setContact] = useState()
   const [isValidContact, setIsValidContact] = useState(true)
   const ingredientsPrices = useSelector(state => state.ingredientsPrices)
@@ -51,6 +53,7 @@ export default function Checkout() {
 		}
 
     apiService.createOrder(order)
+      .then(() => dispatch(ACTION.resetIngredients()))
       .then(() => history.push('/orders'))
 	}
 

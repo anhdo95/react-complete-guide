@@ -28,6 +28,11 @@ export default (state = initialState, action) => {
       state.totalPrice -= state.ingredientsPrices[action.payload.type]
       break
 
+    case ACTION.RESET_INGREDIENTS:
+      state.ingredients = initialState.ingredients
+      state.totalPrice = initialState.totalPrice
+      break
+
 		default:
 			break
   }

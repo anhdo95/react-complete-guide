@@ -1,6 +1,7 @@
 export const SET_INGREDIENTS_PRICES = 'SET_INGREDIENTS_PRICES'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
+export const RESET_INGREDIENTS = 'RESET_INGREDIENTS'
 
 export function setIngredientsPrices(prices) {
   return {
@@ -10,7 +11,6 @@ export function setIngredientsPrices(prices) {
 }
 
 export function addIngredient(type) {
-  console.log('type', type)
   return {
     type: ADD_INGREDIENT,
     payload: {
@@ -25,5 +25,11 @@ export function removeIngredient(type) {
     payload: {
       type
     }
+  }
+}
+
+export function resetIngredients() {
+  return {
+    type: RESET_INGREDIENTS,
   }
 }
