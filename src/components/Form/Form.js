@@ -18,7 +18,7 @@ function formReducer (state = initialState, action) {
       break;
 
     case 'CHECK_VALID':
-      state.isValid = _.some(state.controls, (control) => !control.validity.isValid)
+      state.isValid = _.every(state.controls, (control) => control.validity.isValid)
       break
   
     default:
@@ -45,7 +45,21 @@ export default function Form( props ) {
     })
     dispatch({ type: 'CHECK_VALID' })
 
-    props.onChange(state.isValid, state.controls)
+    const values = _.reduce(
+			state.controls,
+			(result, control, key) => {
+				result[key] = control.value
+				return result
+			},
+			{}
+		)
+
+    console.log('values', values)
+
+    props.onChange(
+			state.isValid,
+			values
+		)
   }
   
   function handleSubmit(event) {

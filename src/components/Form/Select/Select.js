@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import classes from './Select.module'
 
@@ -17,6 +17,15 @@ const AVAILABLE_ATTRS = [
 ]
 
 export default function Select( props ) {
+  useEffect(() => {
+    if (props.items && props.items.length) {
+      props.onChange({
+				target: { value: props.items[0].value },
+			})
+    }
+
+  }, [])
+
   const attrs = AVAILABLE_ATTRS.reduce((result, attr) => {
     props[attr] && (result[attr] = props[attr])
     return result
