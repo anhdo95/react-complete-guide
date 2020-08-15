@@ -19,3 +19,10 @@ export function signUp(data) {
 	)
 }
 
+export function signIn(data) {
+  return axios.post(
+		`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`,
+		data
+	)
+}
+

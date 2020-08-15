@@ -9,9 +9,9 @@ import FormItem from '@/components/Form/FormItem/FormItem'
 import Input from '@/components/Form/Input/Input'
 import Button from '@/components/Button/Button'
 
-import classes from './SignUp.module'
+import classes from './SignIn.module'
 
-const signUpControls = [
+const signInControls = [
 	{
 		element: <Input placeholder="Your email" />,
 		name: "email",
@@ -44,12 +44,12 @@ const signUpControls = [
   },
 ]
 
-export default function SignUp() {
+export default function SignIn() {
   const history = useHistory()
 
   function handleSubmit(isValid, values) {
     if (isValid) {
-      apiService.signUp({
+      apiService.signIn({
         email: values.email,
         password: values.password,
         returnSecureToken: true
@@ -61,16 +61,16 @@ export default function SignUp() {
         Cookies.set('token', res.idToken, {
           expires
         })
-
+        
         history.replace('/')
       })
     }
   }
 
   return (
-    <Form className={classes.SignUp} onSubmit={handleSubmit}>
-			<h3>Sign Up Form</h3>
-			{signUpControls.map((control) => (
+    <Form className={classes.SignIn} onSubmit={handleSubmit}>
+			<h3>Sign In Form</h3>
+			{signInControls.map((control) => (
 				<FormItem
 					key={control.name}
 					name={control.name}
@@ -80,8 +80,8 @@ export default function SignUp() {
 					{control.element}
 				</FormItem>
 			))}
-      <p>If you have an account already? Move to <Link to="/sign-in">sign in instead</Link></p>
-      <Button theme="Success" type="submit">Sign up</Button>
+			<p>If you don't have an account yet? Move to <Link to="/sign-up">sign up instead</Link></p>
+      <Button theme="Success" type="submit">Sign in</Button>
 		</Form>
   )
 }
