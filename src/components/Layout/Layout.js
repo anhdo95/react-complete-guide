@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { useDispatch } from 'react-redux'
 import _ from 'lodash'
+import Cookies from 'js-cookie'
+import jwtDecode from 'jwt-decode'
 
 import Toolbar from '@/components/Navigation/Toolbar/Toolbar'
 import Spinner from '@/components/Spinner/Spinner'
@@ -19,6 +21,16 @@ export default function Layout( props ) {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		if (Cookies.get('token')) {
+			const user = jwtDecode(Cookies.get('token'))
+
+			dispatch(ACTION.setUser({
+				userId: user.user_id,
+				email: user.email,
+				expiresIn: new Date(user.exp * 1000)
+			}))
+		}
+
 		async function loadIngredientsPrices() {
 			const pricesData = await apiService.getIngredientsPrices()
 			const result = _.reduce(pricesData, (_, prices) => prices, {})

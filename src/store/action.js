@@ -1,7 +1,15 @@
 export const SET_INGREDIENTS_PRICES = 'SET_INGREDIENTS_PRICES'
+export const SET_USER = 'SET_USER'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
 export const RESET_INGREDIENTS = 'RESET_INGREDIENTS'
+
+export function setUser(user) {
+  return {
+    type: SET_USER,
+    payload: user
+  }
+}
 
 export function setIngredientsPrices(prices) {
   return {

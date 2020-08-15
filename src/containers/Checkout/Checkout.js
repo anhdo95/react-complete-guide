@@ -16,6 +16,7 @@ export default function Checkout() {
   const dispatch = useDispatch()
   const [contact, setContact] = useState()
   const [isValidContact, setIsValidContact] = useState(true)
+  const user = useSelector(state => state.user)
   const ingredientsPrices = useSelector(state => state.ingredientsPrices)
 
   const ingredients = qs.parse(location.search.slice(1))
@@ -50,6 +51,7 @@ export default function Checkout() {
 				email: contact.email,
 			},
       deliveryMethod: contact.deliveryMethod,
+      userId: user.userId
 		}
 
     apiService.createOrder(order)

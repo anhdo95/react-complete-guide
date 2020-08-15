@@ -28,7 +28,9 @@ function App() {
 							<PrivateRoute path="/checkout">
 								<Checkout />
 							</PrivateRoute>
-							<Route path="/orders" component={Orders} />
+							<PrivateRoute path="/orders">
+								<Orders />
+							</PrivateRoute>
 							<Route path="/sign-up" component={SignUp} />
 							<Route path="/sign-in" component={SignIn} />
 							<Route path="/sign-out" component={SignOut} />

@@ -2,6 +2,7 @@ import _ from 'lodash'
 import * as ACTION from './action'
 
 const initialState = {
+  user: null,
   ingredients: {
     salad: 0,
     cheese: 0,
@@ -14,6 +15,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ACTION.SET_USER:
+      state.user = action.payload
+      break
+
 		case ACTION.SET_INGREDIENTS_PRICES:
 			state.ingredientsPrices = action.payload
 			break
