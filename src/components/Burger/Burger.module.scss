@@ -5,3 +5,18 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.Ingredient {
+  transition: all 0.3s ease-in;
+  
+  &.fadeEnter,
+  &.fadeExit {
+    opacity: 0;
+  }
+
+  &.fadeEnterDone
+  &.fadeExitDone {
+    opacity: 1;
+  }
+}
+
