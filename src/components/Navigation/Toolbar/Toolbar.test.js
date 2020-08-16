@@ -31,10 +31,29 @@ describe('<Toolbar />', () => {
   test('should render two <NavigationItem /> elements if not authenticated', () => {
     expect(wrapper.find(NavigationItem)).toHaveLength(2)
   })
-  
-  test('should render three <NavigationItem /> elements if authenticated', () => {
-    Cookies.set('token', 'token')
-    wrapper = shallow(<Toolbar />)
-    expect(wrapper.find(NavigationItem)).toHaveLength(3)
+
+  describe('If authenticated', () => {
+    beforeEach(() => {
+      Cookies.set('token', 'token')
+      wrapper = shallow(<Toolbar />)
+    })
+
+    test('should render three <NavigationItem /> elements', () => {
+      expect(wrapper.find(NavigationItem)).toHaveLength(3)
+    })
+
+    test('should render an exact logout link', () => {
+      expect(
+				wrapper.contains(
+					<NavigationItem to="/sign-out" exact>
+						Sign Out
+					</NavigationItem>
+				)
+			).toBe(true)
+    })
+    
   })
+  
+  
+  
 })
