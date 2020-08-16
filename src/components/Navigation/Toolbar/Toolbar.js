@@ -7,8 +7,8 @@ import classes from './Toolbar.module'
 import NavigationItem from '../NavigationItem/NavigationItem'
 
 export default function Toolbar() {
-  const isAuthenticated =  Cookies.get('token')
-
+	const isAuthenticated =  Cookies.get('token')
+	
   return (
 		<div className={classes.Toolbar}>
 			<div className={classes.LogoContainer}>
