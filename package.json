@@ -117,12 +117,12 @@
       "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$"
     ],
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
+      "^@/(.*)$": "<rootDir>/src/$1",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [
@@ -135,7 +135,10 @@
       "json",
       "web.jsx",
       "jsx",
-      "node"
+      "node",
+      "scss",
+      "sass",
+      "css"
     ],
     "watchPlugins": [
       "jest-watch-typeahead/filename",
@@ -148,7 +151,10 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.3",
     "node-sass": "^4.14.1",
+    "react-test-renderer": "^16.13.1",
     "redux-devtools-extension": "^2.13.8"
   }
 }
